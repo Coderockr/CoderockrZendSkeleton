@@ -1,10 +1,11 @@
 {
-    "name": "zendframework/skeleton-application",
+    "name": "coderockr/zend-skeleton",
     "description": "Skeleton Application for ZF2",
     "license": "BSD-3-Clause",
     "keywords": [
         "framework",
-        "zf2"
+        "zf2",
+        "doctrine2"
     ],
     "minimum-stability": "dev",
     "require": {
