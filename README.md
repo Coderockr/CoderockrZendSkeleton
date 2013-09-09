@@ -1,8 +1,13 @@
 # Para instalar:
 
-curl -s https://getcomposer.org/installer | php
-php composer.phar create-project -s dev coderockr/zend-skeleton project_name
-
+    curl -s https://getcomposer.org/installer | php
+    php composer.phar create-project -s dev coderockr/zend-skeleton project_name
+    cd project_name
+    git init
+    git remote add origin git@github.com:Coderockr/Projeto.git
+    git add .
+    git commit -m "Commit inicial"
+    git push origin master
 
 # Configuração do servidor
 
