@@ -1,3 +1,9 @@
+# Para instalar:
+
+curl -s https://getcomposer.org/installer | php
+php composer.phar create-project coderockr/zend-skeleton project_name
+
+
 # Configuração do servidor
 
     <VirtualHost *:80>
