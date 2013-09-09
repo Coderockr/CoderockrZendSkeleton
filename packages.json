@@ -1,0 +1,15 @@
+{
+    "packages": {
+    	"name": "coderockr/zend-skeleton",
+    	"version": "0.0.1",
+		"dist": {
+	        "url": "https://github.com/Coderockr/CoderockrZendSkeleton/zipball/master",
+	        "type": "zip"
+		},
+		"source": {
+            "url": "https://github.com/Coderockr/CoderockrZendSkeleton",
+            "type": "git",
+            "reference": ""
+        }
+    }
+}
