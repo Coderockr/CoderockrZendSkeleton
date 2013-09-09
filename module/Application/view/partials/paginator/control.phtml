@@ -1,0 +1,42 @@
+<?php if ($this->pageCount > 1): ?>
+<div class="navigation clearfix">
+  <ul>
+    <?php if($this->current != 1): ?>
+        <li class="first-child"><a href="<?php echo $this->url(null, array('page' => 1), true) ?>?<?php echo http_build_query($this->query) ?>">&rsaquo;</a></li>
+    <?php else: ?>
+        <li class="first-child"><a href="<?php echo $this->url(null, array('page' => 1), true) ?>?<?php echo http_build_query($this->query) ?>" class="disabled">&rsaquo;</a></li>
+    <?php endif;?>
+
+    <!-- Previous page link -->
+    <?php if (isset($this->previous)): ?>
+        <li class="nth-child2"><a href="<?php echo $this->url(null, array('page' => $this->previous), true) ?>?<?php echo http_build_query($this->query) ?>">&lt;</a></li>
+    <?php else: ?>
+        <li class="nth-child2"><a href="#" class="disabled">&lt;</a></li>
+    <?php endif; ?>
+
+    <!-- Numbered page links -->
+    <?php foreach ($this->pagesInRange as $page): ?>
+        <?php if ($page != $this->current): ?>
+            <li><a href="<?php echo $this->url(null, array('page' => $page), true) ?>?<?php echo http_build_query($this->query) ?>" class="btn"><?php echo $page; ?></a></li>
+        <?php else: ?>
+            <li><a href="#" class="btn disabled"><?php echo $page; ?></a></li>
+        <?php endif; ?>
+    <?php endforeach; ?>
+    <!-- Next page link -->
+
+    <?php if (isset($this->next)): ?>
+        <li class="nth-last-child2"><a href="<?php echo $this->url(null, array('page' => $this->next), true) ?>?<?php echo http_build_query($this->query) ?>">&gt;</a></li>
+    <?php else: ?>
+        <li class="nth-last-child2"><a href="#" class="disabled">&gt;</a></li>
+    <?php endif; ?>
+
+    <?php if($this->current != $this->pageCount): ?>
+        <li class="last-child"><a href="<?php echo $this->url(null, array('page' => $this->pageCount), true) ?>?<?php echo http_build_query($this->query) ?>">&raquo;</a></li>
+    <?php else: ?>
+        <li class="last-child"><a href="<?php echo $this->url(null, array('page' => 1), true) ?>?<?php echo http_build_query($this->query) ?>" class="disabled">&raquo;</a></li>
+    <?php endif;?>
+
+  </ul>
+  <span class="info"><?php echo $this->current;?> de <?php echo $this->pageCount;?></span>
+</div>
+<?php endif; ?>

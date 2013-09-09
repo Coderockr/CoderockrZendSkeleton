@@ -1,0 +1,75 @@
+<div>
+<h1><?php echo 'Usuários do Aplicativo' ?></h1>
+    <table class="datatable">
+        <thead>
+            <tr>
+                <th><?php echo 'Email' ?></th>
+                <th><?php echo 'Unidade' ?></th>
+                <th><?php echo 'Ocupação' ?></th>
+                <th><?php echo 'Status' ?></th>
+                <th><?php echo 'Bloqueio' ?></th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        if( count($this->appUsers)>0){
+            foreach ($this->appUsers as $appUser) { ?>
+                <?php 
+                    switch($appUser->getStatus()){
+                        case 1:
+                            $status = 'Ativo';
+                            $botao = 'i_locked';
+                            break;
+                        case 2:
+                            $status = 'Bloqueado';
+                            $botao = 'i_unlocked';
+                            break;
+                        case 3: 
+                            $status = 'Aguardando confirmação';
+                            $botao = 'i_plus';
+                            break;
+                    } ?>
+                    <tr class="gradeX" id="<?php echo $appUser->getId(); ?>">
+                        <td>
+                            
+                            <?php echo $appUser->email ?>
+                        </td>
+                        <td>
+                            <?php if($appUser->unit){?>
+                                <select name='unit' id="unit">
+                                    <?php foreach ($units as $unit) {?>
+                                        <option value="<?php echo $unit[1]; ?>"
+                                            <?php if($appUser->unit == $unit[1]){ echo 'selected="selected"';   } ?> >
+                                            <?php echo $unit[0]; ?>
+                                        </option>
+                                    <?php }  ?>
+                                </select>
+                            <?php }?>
+                        </td>
+                        <td>
+                            <?php if($appUser->job){?>
+                                <select name="job" id="job">
+                                    <?php foreach ($jobs as $job) {?>
+                                        <option value="<?php echo $job; ?>"
+                                            <?php if($appUser->job == $job){ echo 'selected="selected"';   } ?> >
+                                            <?php echo $job; ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                            <?php }  ?>
+                        </td>
+                        <td><?php echo $status ?></td>
+                        <td width='40'>
+                            <a href="/app/block/id/<?php echo $appUser->id ?>" class="btn <?php echo $botao ?>"></a>
+                        </td>
+                </tr>
+       <?php
+            }
+        }  else { ?>
+            <tr class="gradeX" >
+                <td colspan='5'><?php echo 'No App user' ?>.</td>
+            </tr>
+        <?php } ?>    
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,28 @@
+<div id='login'>
+    <div class='login'>
+        <div>
+            <section>
+                <form action=""  method="post" id="login-form" >
+                    <fieldset>
+                        <section><label for="login">Nome</label>
+                            <div><input type="text" id="login" name="login" autofocus></div>
+                        </section>
+                        <section><label for="password">Senha </label>
+                            <div><input type="password" id="password" name="password"></div>
+                        </section>     
+                        <?php if ($this->error) : ?>
+                            <section> 
+                                <div class="clearfix alert warning">
+                                    <span for="senha" generated="true" class="warning" style="display: block;"><?php echo $this->error; ?>
+                                    </span>
+                                </div>  
+                            </section>
+                        <?php endif; ?> 
+                        <section>
+                            <div><button class="fr submit">Login</button></div>
+                        </section>
+                    </fieldset>
+                </form>
+            </section>
+    </div>
+</div>
