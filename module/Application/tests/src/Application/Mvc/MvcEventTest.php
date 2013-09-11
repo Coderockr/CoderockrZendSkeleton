@@ -26,7 +26,7 @@ class MvcEventTest extends ServiceTestCase
     public function testPreDispatchWithoutLogin()
     { 
         $mvcEvent = new MvcEvent;
-        $controller = $this->serviceManager->get('Application\Controller\AppUserController');
+        $controller = $this->serviceManager->get('Application\Controller\IndexController');
         $controller->getEvent()->setResponse(new Response);
         $this->event->setTarget($controller);
         $response = $mvcEvent->preDispatch($this->event);
@@ -56,7 +56,7 @@ class MvcEventTest extends ServiceTestCase
 
         $mvcEvent = new MvcEvent;
 
-        $controller = $this->serviceManager->get('Application\Controller\AppUserController');
+        $controller = $this->serviceManager->get('Application\Controller\IndexController');
         $controller->getEvent()->setResponse(new Response);
         $this->event->setTarget($controller);
         $response = $mvcEvent->preDispatch($this->event);
