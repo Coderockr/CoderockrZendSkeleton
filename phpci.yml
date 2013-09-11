@@ -7,9 +7,9 @@ build_settings:
         pass: ""
 setup:
     mysql:
-        - "DROP DATABASE IF EXISTS evodonto_test;"
-        - "CREATE DATABASE evodonto_test;"
-        - "GRANT ALL PRIVILEGES ON evodonto_test.* TO evodonto@'localhost' IDENTIFIED BY 'evodonto';"
+        - "DROP DATABASE IF EXISTS coderockr_skell_test;"
+        - "CREATE DATABASE coderockr_skell_test;"
+        - "GRANT ALL PRIVILEGES ON coderockr_skell_test.* TO coderockr_skell@'localhost' IDENTIFIED BY 'coderockr_skell';"
     composer:
         action: "install"
 
@@ -28,4 +28,4 @@ test:
         allow_failures: true
 complete:
     mysql:
-        - "DROP DATABASE IF EXISTS evodonto_test;"
+        - "DROP DATABASE IF EXISTS coderockr_skell_test;"
