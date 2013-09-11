@@ -1,0 +1,31 @@
+build_settings:
+    ignore:
+        - "vendor"
+    mysql:
+        host: "localhost"
+        user: "root"
+        pass: ""
+setup:
+    mysql:
+        - "DROP DATABASE IF EXISTS evodonto_test;"
+        - "CREATE DATABASE evodonto_test;"
+        - "GRANT ALL PRIVILEGES ON evodonto_test.* TO evodonto@'localhost' IDENTIFIED BY 'evodonto';"
+    composer:
+        action: "install"
+
+test:
+    php_unit:
+        config:
+            - "module/Application/tests/phpunit.xml"
+        directory:
+            - "module/Application/tests/"
+        run_from: "./"
+    php_mess_detector:
+        allow_failures: true
+    php_code_sniffer:
+        standard: "PSR2"
+    php_cpd:
+        allow_failures: true
+complete:
+    mysql:
+        - "DROP DATABASE IF EXISTS evodonto_test;"
