@@ -65,8 +65,7 @@ class Module
         return array(
             'factories' => array(
                 'Application\Service\Auth' => function($sm) {
-                    $dbAdapter = $sm->get('DbAdapter');
-                    return new Service\Auth($dbAdapter);
+                    return new Service\Auth;
                 },
             ),
         );

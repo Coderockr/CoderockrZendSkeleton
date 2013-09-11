@@ -97,9 +97,11 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
                     $this->routes[$key] = $name;
                 }
             }
+            $moduleName = explode('\\',get_class($m));
+            $moduleName = $moduleName[0];
             //verifica se existe um arquivo de configuração específico no módulo para testes
-            if (file_exists(getcwd() . '/module/' . ucfirst($m) . '/config/test.config.php')) {
-                $testConfig = include getcwd() . '/module/' . ucfirst($m) . '/config/test.config.php';
+            if (file_exists(getcwd() . '/module/' . ucfirst($moduleName) . '/config/test.config.php')) {
+                $testConfig = include getcwd() . '/module/' . ucfirst($moduleName) . '/config/test.config.php';
                 array_unshift($config['module_listener_options']['config_static_paths'], $testConfig[$env]);
             }
         }

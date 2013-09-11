@@ -18,6 +18,6 @@ class IndexController extends ActionController
 {
     public function indexAction()
     {
-        
+        return new ViewModel;
     }
 }
