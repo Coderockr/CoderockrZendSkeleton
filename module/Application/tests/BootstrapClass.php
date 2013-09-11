@@ -30,7 +30,7 @@ class BootstrapClass
         return __DIR__ . '/../../../module/' . \Bootstrap::getModuleName();
     }
 
-    public static function go()
+    public static function execute()
     {
         chdir(dirname(__DIR__ . '/../../../..'));
 

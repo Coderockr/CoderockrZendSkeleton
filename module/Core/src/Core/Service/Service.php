@@ -22,20 +22,20 @@ abstract class Service implements ServiceManagerAwareInterface
      /**
     * @var Doctrine\ORM\EntityManager
     */
-    protected $em;
+    protected $entityManager;
     protected $entityName;
      
-    public function setEntityManager($em)
+    public function setEntityManager($entityManager)
     {
-        $this->em = $em;
+        $this->entityManager = $entityManager;
     }
 
     public function getEntityManager()
     {
-        if (null === $this->em) {
-             $this->em = $this->getServiceManager()->get('EntityManager');
+        if (null === $this->entityManager) {
+             $this->entityManager = $this->getServiceManager()->get('EntityManager');
         }
-        return $this->em;
+        return $this->entityManager;
     }
 
     /**

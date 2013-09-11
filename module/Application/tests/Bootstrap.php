@@ -3,4 +3,4 @@ namespace Application;
 
 include 'BootstrapClass.php';
 
-BootstrapClass::go();
+BootstrapClass::execute();

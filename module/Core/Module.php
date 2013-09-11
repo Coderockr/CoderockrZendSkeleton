@@ -11,12 +11,12 @@ class Module
     /**
      * Executada no bootstrap do módulo
      * 
-     * @param MvcEvent $e
+     * @param MvcEvent $event
      */
-    public function onBootstrap($e)
+    public function onBootstrap($event)
     {
         /** @var \Zend\ModuleManager\ModuleManager $moduleManager */
-        $moduleManager = $e->getApplication()->getServiceManager()->get('modulemanager');
+        $moduleManager = $event->getApplication()->getServiceManager()->get('modulemanager');
         /** @var \Zend\EventManager\SharedEventManager $sharedEvents */
         $sharedEvents = $moduleManager->getEventManager()->getSharedManager();
 
@@ -64,12 +64,12 @@ class Module
     {
         return array(
             'factories' => array(
-                'Core\Service\Client' => function ($sm) { //cria um novo Client de acordo com a configuração
-                    $config = $sm->get('Configuration');
+                'Core\Service\Client' => function ($serviceManager) { //cria um novo Client de acordo com a configuração
+                    $config = $serviceManager->get('Configuration');
                     $apiConfig = $config['api'];
                     return new Service\Client($apiConfig['apiKey'], $apiConfig['apiUri'], $apiConfig['rpcUri']);
                 },
-                'Log' => function ($sm) {
+                'Log' => function ($serviceManager) {
                     $writer = new \Zend\Log\Writer\Stream('/tmp/project.log');
                     $logger = new \Zend\Log\Logger();
                     $logger->addWriter($writer);
@@ -81,24 +81,24 @@ class Module
 
     /**
      * Faz o processamento dos erros da aplicação
-     * @param MvcEvent $e
+     * @param MvcEvent $event
      * @return null|\Zend\Http\PhpEnvironment\Response
      */
-    public function errorProcess(MvcEvent $e)
+    public function errorProcess(MvcEvent $event)
     {
-        $routeMatch = $e->getRouteMatch();
+        $routeMatch = $event->getRouteMatch();
 
         $formatter = $routeMatch->getParam('formatter', false);
         if ($formatter == false) {
             return;
         }
-        /** @var \Zend\Di\Di $di */
-        $di = $e->getApplication()->getServiceManager()->get('di');
+        /** @var \Zend\Di\Di $dInjector */
+        $dInjector = $event->getApplication()->getServiceManager()->get('di');
 
-        $eventParams = $e->getParams();
+        $eventParams = $event->getParams();
 
         /** @var array $configuration */
-        $configuration = $e->getApplication()->getConfig();
+        $configuration = $event->getApplication()->getConfig();
 
         $vars = array();
         if (isset($eventParams['exception'])) {
@@ -120,9 +120,9 @@ class Module
         }
 
         /** @var PostProcessor\AbstractPostProcessor $postProcessor */
-        $postProcessor = $di->get(
+        $postProcessor = $dInjector->get(
             $configuration['errors']['post_processor'],
-            array('vars' => $vars, 'response' => $e->getResponse())
+            array('vars' => $vars, 'response' => $event->getResponse())
         );
                 
         $postProcessor->process();
@@ -130,12 +130,12 @@ class Module
         if ($eventParams['error'] === \Zend\Mvc\Application::ERROR_CONTROLLER_NOT_FOUND ||
             $eventParams['error'] === \Zend\Mvc\Application::ERROR_ROUTER_NO_MATCH
         ) {
-            $e->getResponse()->setStatusCode(\Zend\Http\PhpEnvironment\Response::STATUS_CODE_501);
+            $event->getResponse()->setStatusCode(\Zend\Http\PhpEnvironment\Response::STATUS_CODE_501);
         } else {
-            $e->getResponse()->setStatusCode(\Zend\Http\PhpEnvironment\Response::STATUS_CODE_500);
+            $event->getResponse()->setStatusCode(\Zend\Http\PhpEnvironment\Response::STATUS_CODE_500);
         }
 
-        $e->stopPropagation();
+        $event->stopPropagation();
 
         return $postProcessor->getResponse();
     }

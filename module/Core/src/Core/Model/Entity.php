@@ -129,6 +129,7 @@ abstract class Entity implements InputFilterAwareInterface
     public function setInputFilter(InputFilterInterface $inputFilter)
     {
         throw new EntityException("Not used");
+        return $inputFilter;
     }
 
     /**

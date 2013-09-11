@@ -16,29 +16,29 @@ class UserTest extends ModelTestCase
     public function testGetInputFilter()
     {
         $user = new User();
-        $if = $user->getInputFilter();
+        $inputFilter = $user->getInputFilter();
  
-        $this->assertInstanceOf("Zend\InputFilter\InputFilter", $if);
-        return $if;
+        $this->assertInstanceOf("Zend\InputFilter\InputFilter", $inputFilter);
+        return $inputFilter;
     }
 
     /**
      * @depends testGetInputFilter
      */
-    public function testInputFilterValid($if)
+    public function testInputFilterValid($inputFilter)
     {
         $user = new User();
-        $if = $user->getInputFilter();
+        $inputFilter = $user->getInputFilter();
 
         //verifica se os filtros estão configurados corretamente
-        $this->assertEquals(6, $if->count());
+        $this->assertEquals(6, $inputFilter->count());
  
-        $this->assertTrue($if->has('id'));
-        $this->assertTrue($if->has('name'));
-        $this->assertTrue($if->has('login'));
-        $this->assertTrue($if->has('password'));
-        $this->assertTrue($if->has('status'));
-        $this->assertTrue($if->has('created'));
+        $this->assertTrue($inputFilter->has('id'));
+        $this->assertTrue($inputFilter->has('name'));
+        $this->assertTrue($inputFilter->has('login'));
+        $this->assertTrue($inputFilter->has('password'));
+        $this->assertTrue($inputFilter->has('status'));
+        $this->assertTrue($inputFilter->has('created'));
     }
 
     /**
@@ -48,8 +48,8 @@ class UserTest extends ModelTestCase
     public function testSetInputFilter()
     {
         $user = new User();
-        $if = new InputFilter();
-        $user->setInputFilter($if);
+        $inputFilter = new InputFilter();
+        $user->setInputFilter($inputFilter);
     }
 
     /**
@@ -59,8 +59,8 @@ class UserTest extends ModelTestCase
     {
         $user = $this->getFixture('Application\Test\Fixture\User')->build();
 
-        $em = $this->getService('EntityManager');
-        $saved = $em->getRepository('Application\Model\User')->find($user->id);
+        $entityManager = $this->getService('EntityManager');
+        $saved = $entityManager->getRepository('Application\Model\User')->find($user->id);
 
         $this->assertEquals($user->id, $saved->id);
     }

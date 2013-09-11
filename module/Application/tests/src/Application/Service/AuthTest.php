@@ -47,7 +47,7 @@ class AuthTest extends ServiceTestCase
         $this->em->flush();
         $parameters = ParameterFactory::factory(array());
         $result = $this->authService->authenticate($parameters);
-
+        return $result;
     }
 
     /**
@@ -71,6 +71,7 @@ class AuthTest extends ServiceTestCase
         );
 
         $result = $this->authService->authenticate($parameters);
+        return $result;
     }
 
     /**

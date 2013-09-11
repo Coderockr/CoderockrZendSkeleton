@@ -18,21 +18,21 @@ class NormalizeString
     public function normalize($string)
     {
 
-        $de = array("ç", "æ", "", "á", "é", "í", "ó", "ú", "à", "è",
+        $origin = array("ç", "æ", "", "á", "é", "í", "ó", "ú", "à", "è",
                  "ì", "ò", "ù", "ä", "ë", "ï", "ö", "ü", "ÿ", "â",
                  "ê", "î", "ô", "û", "å", "e", "i", "ø", "u", "Ç",
                  "Æ", "", "Á", "É", "Í", "Ó", "Ú", "À", "È", "Ì",
                  "Ò", "Ù", "Ä", "Ë", "Ï", "Ö", "Ü", "", "Â", "Ê",
                  "Î", "Ô", "Û", "Å", "Ø", "ĩ", "Î");
 
-        $para =   array("c", "ae", "oe", "a", "e", "i", "o", "u", "a", "e",
+        $destination =   array("c", "ae", "oe", "a", "e", "i", "o", "u", "a", "e",
                  "i", "o", "u", "a", "e", "i", "o", "u", "y", "a",
                  "e", "i", "o", "u", "a", "e", "i", "o", "u", "C",
                  "AE", "OE", "A", "E", "I", "O", "U", "A", "E", "I",
                  "O", "U", "A", "E", "I", "O", "U", "Y", "A", "E",
                  "I", "O", "U", "A", "O", "i" , "I");
                  
-        $string = str_replace($de, $para, $string);
+        $string = str_replace($origin, $destination, $string);
         $string = strtolower($string);
         $string = str_replace(" ", "_", $string);
         return $string;

@@ -19,8 +19,8 @@ class MvcEvent
      */
     public function preDispatch($event)
     {
-        $di = $event->getTarget()->getServiceLocator();
-        $session = $di->get('Session');
+        $dependencyInjector = $event->getTarget()->getServiceLocator();
+        $session = $dependencyInjector->get('Session');
         if (! $session->offsetGet('user')) {
             return $event->getTarget()->redirect()->toUrl('/');
         }
@@ -33,7 +33,7 @@ class MvcEvent
         // $actionName = $routeMatch->getParam('action');
         
         // //autorização
-        // $authService = $di->get('Application\Service\Auth');
+        // $authService = $dependencyInjector->get('Application\Service\Auth');
         
         // $parameters = ParameterFactory::factory(
         //     array('moduleName' => $moduleName, 'controllerName' => $controllerName, 'actionName' => $actionName)

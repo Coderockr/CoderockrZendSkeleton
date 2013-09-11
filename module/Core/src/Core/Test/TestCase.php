@@ -47,7 +47,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
      * EntityManager  
      * @var EntityManager
      */
-    protected $em = null;
+    protected $entityManager = null;
 
     /**
      * Variável que configura se devem ser criadas as chaves estrangeiras das tabelas

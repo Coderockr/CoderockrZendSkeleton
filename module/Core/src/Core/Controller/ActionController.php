@@ -29,8 +29,8 @@ abstract class ActionController extends AbstractActionController
      */
     protected function getTable($table)
     {
-        $sm = $this->getServiceLocator();
-        $dbAdapter = $sm->get('DbAdapter');
+        $serviceManager = $this->getServiceLocator();
+        $dbAdapter = $serviceManager->get('DbAdapter');
         $tableGateway = new TableGateway($dbAdapter, $table, new $table);
         $tableGateway->initialize();
         

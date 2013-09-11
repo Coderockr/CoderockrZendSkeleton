@@ -16,12 +16,12 @@ class Module
     /**
      * Executada no bootstrap do módulo
      * 
-     * @param MvcEvent $e
+     * @param MvcEvent $event
      */
-    public function onBootstrap($e)
+    public function onBootstrap($event)
     {
         /** @var \Zend\ModuleManager\ModuleManager $moduleManager */
-        $moduleManager = $e->getApplication()->getServiceManager()->get('modulemanager');
+        $moduleManager = $event->getApplication()->getServiceManager()->get('modulemanager');
         /** @var \Zend\EventManager\SharedEventManager $sharedEvents */
         $sharedEvents = $moduleManager->getEventManager()->getSharedManager();
 
@@ -69,7 +69,7 @@ class Module
     {
         return array(
             'factories' => array(
-                'Application\Service\Auth' => function ($sm) {
+                'Application\Service\Auth' => function () {
                     return new Service\Auth;
                 },
             ),

@@ -48,35 +48,54 @@ class DateTimeFormat extends AbstractHelper implements ServiceLocatorAwareInterf
      */
     public function __invoke($data, $key, $dateFormat = 'd/m/Y', $default = '')
     {
-        if (is_string($data) && $data) {
-            $data = $this->createFromFormat($data);
-            if ($data instanceof \DateTime) {
-                return $data->format($dateFormat);
-            }
+        $data = $this->convertFromString($data);
+        if (!$data instanceof \DateTime) {
+            $data = $this->convertFromObject($data, $key);
+        }
+
+        if (!$data instanceof \DateTime) {
+            $data = $this->convertFromArray($data, $key);
+        }
+
+        if ($data instanceof \DateTime) {
+            return $data->format($dateFormat);
         }
         
+        return $default;
+    }
+
+    private function convertFromString($data) 
+    {
+        if (is_string($data) && $data) {
+            return $this->createFromFormat($data);
+        }
+        return $data;
+    }    
+
+    private function convertFromObject($data, $key)
+    {        
         if (is_object($data) && isset($data->$key) && !is_null($data->$key)) {
             
             if (!($data->$key instanceof \DateTime)) {
-                $data->$key = $this->createFromFormat($data->$key);
-            }
-            if ($data->$key instanceof \DateTime) {
-                return $data->$key->format($dateFormat);
+                return $this->createFromFormat($data->$key);
             }
         }
+        return $data;
+    }
+
+    private function convertFromArray($data, $key)
+    {
         if (is_array($data) && isset($data[$key]) && !is_null($data[$key])) {
             
             if (!($data[$key] instanceof \DateTime)) {
-                $data[$key] = $this->createFromFormat($data[$key]);
+                return $this->createFromFormat($data[$key]);
             }
 
-            if ($data[$key] instanceof \DateTime) {
-                return $data[$key]->format($dateFormat);
-            }
         }
 
-        return $default;
+        return $data;
     }
+
 
     private function createFromFormat($value)
     {

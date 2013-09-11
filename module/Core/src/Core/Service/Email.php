@@ -128,36 +128,23 @@ class Email extends Service
     **/
     private function getFileType($extension)
     {
+        $knownExtensions = array(
+            'jpg' => 'image/jpeg',
+            'pdf' => 'application/pdf',
+            'png' => 'image/png',
+            'ppt' => 'application/vnd.ms-powerpoint',
+            'xls' => 'application/vnd.ms-excel',
+            'tar' => 'application/x-tar',
+            'txt' => 'text/plain',
+            'zip' => 'application/zip',
+            'rar' => 'application/x-rar-compressed',
+        );
+        
         $extension = strtolower($extension);
-        switch ($extension) {
-            case 'jpg':
-                $fileType = 'image/jpeg';
-                break;
-            case 'pdf':
-                $fileType = 'application/pdf';
-                break;
-            case 'png':
-                $fileType = 'image/png';
-                break;
-            case 'ppt':
-                $fileType = 'application/vnd.ms-powerpoint';
-                break;
-            case 'xls':
-                $fileType = 'application/vnd.ms-excel';
-                break;
-            case 'tar':
-                $fileType = 'application/x-tar';
-                break;
-            case 'txt':
-                $fileType = 'text/plain';
-                break;
-            case 'zip':
-                $fileType = 'application/zip';
-                break;
-            case 'rar':
-                $fileType = 'application/x-rar-compressed';
-                break;
+        if (! isset($knownExtensions[$extension])) {
+            return 'not found';
         }
-        return $fileType;
+
+        return $knownExtensions[$extension];
     }
 }
