@@ -90,8 +90,8 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         $this->routes = array();
         $testConfig = false;
         //carrega as rotas dos módulos
-        foreach ($moduleManager->getModules() as $m) {
-            $moduleConfig = include getcwd() . '/module/' . ucfirst($m) . '/config/module.config.php';
+        foreach ($moduleManager->getLoadedModules() as $m) {
+            $moduleConfig = $m->getConfig();
             if (isset($moduleConfig['router'])) {
                 foreach ($moduleConfig['router']['routes'] as $key => $name) {
                     $this->routes[$key] = $name;
