@@ -14,7 +14,7 @@ use Core\Db\TableGateway;
  */
 abstract class Service implements ServiceManagerAwareInterface
 {
-	/**
+    /**
      * @var ServiceManager
      */
     protected $serviceManager;
@@ -36,7 +36,7 @@ abstract class Service implements ServiceManagerAwareInterface
              $this->em = $this->getServiceManager()->get('EntityManager');
         }
         return $this->em;
-    } 
+    }
 
     /**
      * Cache 
@@ -62,22 +62,6 @@ abstract class Service implements ServiceManagerAwareInterface
         return $this->serviceManager;
     }
 
- //    /**
- //     * Retorna uma instância de TableGateway
- //     * Usado para ter acesso a entidades dentro do mesmo módulo
- //     * 
- //     * @param  string $table
- //     * @return TableGateway
- //     */
-	// protected function getTable($table)
- //    {
- //        $sm = $this->getServiceManager();
- //        $dbAdapter = $sm->get('DbAdapter');
- //        $tableGateway = new TableGateway($dbAdapter, $table, new $table);
- //        $tableGateway->initialize();
- //        return $tableGateway;
- //    }
-
     /**
      * Retorna uma instância de Service\Client
      * Usado para acessar a api/rpc e acessar outros módulos
@@ -95,8 +79,9 @@ abstract class Service implements ServiceManagerAwareInterface
      */
     protected function getCache()
     {
-        if (!$this->cache)
+        if (!$this->cache) {
             $this->cache = $this->getServiceManager()->get('Cache');
+        }
         return $this->cache;
 
     }

@@ -1,5 +1,6 @@
 <?php
 namespace Application;
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -66,15 +67,15 @@ return array(
     ),
     'service_manager' => array(
         'factories' => array(
-            'Session' => function($sm) {
+            'Session' => function ($sm) {
                 return new \Zend\Session\Container('Project');
             },
-            'Email' => function($sm) {
+            'Email' => function ($sm) {
                 $config = $sm->get('Configuration');
                 $options = $config['mailOptions'];
                 return new \Core\Service\Email($options);
             },
-            'Cache' => function($sm) {
+            'Cache' => function ($sm) {
                 $config = $sm->get('Configuration');
                 $cache = \Zend\Cache\StorageFactory::factory(
                     array(
@@ -88,7 +89,7 @@ return array(
 
                 return $cache;
             },
-            'EntityManager' => function($sm) {
+            'EntityManager' => function ($sm) {
                 $env = getenv('ENV');
                 $config = $sm->get('Configuration');
 
@@ -105,7 +106,8 @@ return array(
                 \Doctrine\Common\Annotations\AnnotationReader::addGlobalIgnoredName('events');
 
                 \Doctrine\Common\Annotations\AnnotationRegistry::registerFile(
-                    getenv('PROJECT_ROOT'). '/vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/Driver/DoctrineAnnotations.php'
+                    getenv('PROJECT_ROOT').
+                    '/vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/Driver/DoctrineAnnotations.php'
                 );
                 \Doctrine\Common\Annotations\AnnotationRegistry::registerFile(
                     getenv('PROJECT_ROOT'). '/vendor/jms/serializer/src/JMS/Serializer/Annotation/Groups.php'

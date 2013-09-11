@@ -94,7 +94,7 @@ class Client
      * @param  string $uri Uri do recurso
      * @return array       Resultado da execução
      */
-    public function get($uri) 
+    public function get($uri)
     {
         $this->httpClient->setUri($this->apiUri . $uri);
         $this->httpClient->setMethod(Request::METHOD_GET);
@@ -141,7 +141,7 @@ class Client
             'status' => $response->getStatusCode(),
             'data' => $response->getBody()
         );
-    }    
+    }
 
     /**
      * Acessar a api usando o método HTTP DELETE
@@ -165,7 +165,7 @@ class Client
      * @return array      Array com os dados
      */
     public function toArray($data)
-    { 
+    {
         if (is_object($data)) {
             return get_object_vars($data);
         }

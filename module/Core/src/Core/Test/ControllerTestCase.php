@@ -77,13 +77,15 @@ abstract class ControllerTestCase extends TestCase
         //cria um novo request
         $this->request    = new Request();
         //cria o routeMatch baseado nas configurações do módulo/aplicação
-        $this->routeMatch = new RouteMatch(array(
-            'router' => array(
-                'routes' => array(
-                    $this->controllerRoute => $this->routes[$this->controllerRoute]
+        $this->routeMatch = new RouteMatch(
+            array(
+                'router' => array(
+                    'routes' => array(
+                        $this->controllerRoute => $this->routes[$this->controllerRoute]
+                    )
                 )
             )
-        ));
+        );
         //configura a rota para o evento de MVC corrente
         $this->event->setRouteMatch($this->routeMatch);
         

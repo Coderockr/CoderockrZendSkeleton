@@ -40,8 +40,8 @@ $doctrineConfig->setAutoGenerateProxyClasses(true);
 
 $driver = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver(
     new \Doctrine\Common\Annotations\AnnotationReader(),
-    array( 
-        __DIR__ . '/module/Api/src/Api/Model',  
+    array(
+        __DIR__ . '/module/Api/src/Api/Model',
         __DIR__ . '/module/Application/src/Application/Model'
     )
 );
@@ -56,7 +56,9 @@ $em = \Doctrine\ORM\EntityManager::create(
 $platform = $em->getConnection()->getDatabasePlatform();
 $platform->registerDoctrineTypeMapping('enum', 'string');
 
-$helpers = new Symfony\Component\Console\Helper\HelperSet(array(
-    'db' => new \Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper($em->getConnection()),
-    'em' => new \Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper($em)
-));
+$helpers = new Symfony\Component\Console\Helper\HelperSet(
+    array(
+        'db' => new \Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper($em->getConnection()),
+        'em' => new \Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper($em)
+    )
+);

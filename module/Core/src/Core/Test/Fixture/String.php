@@ -21,14 +21,14 @@ class String extends Fixture
      */
     public function build($data = null)
     {
-        $length = $data['strlen'];        
+        $length = $data['strlen'];
         
         $str = "ABCDEFGHIJLMNOPQRSTUVXZYWKabcdefghijlmnopqrstuvxzywk0123456789";
         $cod = "";
-        for($a = 0;$a < $length;$a++){
-                $rand = rand(0,62);
-                $cod .= substr($str,$rand-1,1);
+        for ($a = 0; $a < $length; $a++) {
+                $rand = rand(0, 62);
+                $cod .= substr($str, $rand-1, 1);
         }
-        return $cod; 
+        return $cod;
     }
 }

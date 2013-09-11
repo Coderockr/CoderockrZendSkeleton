@@ -34,7 +34,7 @@ class NormalizeString
                  
         $string = str_replace($de, $para, $string);
         $string = strtolower($string);
-        $string = str_replace(" ","_",$string);
+        $string = str_replace(" ", "_", $string);
         return $string;
     }
 }

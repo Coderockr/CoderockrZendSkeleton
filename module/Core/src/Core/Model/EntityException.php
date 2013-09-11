@@ -8,4 +8,7 @@ namespace Core\Model;
  * @package    Model
  * @author     Marcos Garcia<garcia@coderockr.com>
  */
-class EntityException extends \Exception {}
+class EntityException extends \Exception
+{
+
+}

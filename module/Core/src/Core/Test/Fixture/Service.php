@@ -38,5 +38,4 @@ class Service extends Fixture
             throw new \Exception("Erro processando consultas do Fixture\Service");
         }
     }
-
 }

@@ -45,7 +45,7 @@ abstract class Entity implements InputFilterAwareInterface
      * @param string $value O valor do campo
      * @return void
      */
-    public function __set($key, $value) 
+    public function __set($key, $value)
     {
         $this->$key = $this->valid($key, $value);
     }
@@ -56,7 +56,7 @@ abstract class Entity implements InputFilterAwareInterface
      * @param string $key O nome do campo
      * @return mixed 
      */
-    public function __get($key) 
+    public function __get($key)
     {
         return $this->$key;
     }
@@ -69,7 +69,7 @@ abstract class Entity implements InputFilterAwareInterface
      */
     public function setData($data)
     {
-        foreach($data as $key => $value) {
+        foreach ($data as $key => $value) {
             $this->__set($key, $value);
         }
     }
@@ -136,7 +136,10 @@ abstract class Entity implements InputFilterAwareInterface
      *
      * @return InputFilter
      */
-    public function getInputFilter() {}
+    public function getInputFilter()
+    {
+
+    }
 
 
     /**
@@ -148,16 +151,16 @@ abstract class Entity implements InputFilterAwareInterface
      */
     protected function valid($key, $value)
     {
-        if (! $this->getInputFilter())
+        if (! $this->getInputFilter()) {
             return $value;
+        }
 
         try {
             $filter = $this->getInputFilter()->get($key);
-        }
-        catch(InvalidArgumentException $e) {
+        } catch (InvalidArgumentException $e) {
             //não existe filtro para esse campo
             return $value;
-        }    
+        }
 
         $filter->setValue($value);
 
@@ -165,7 +168,7 @@ abstract class Entity implements InputFilterAwareInterface
             return $filter->getValue($key);
         }
 
-        if ( ! $filter->isValid()) {
+        if (! $filter->isValid()) {
             throw new EntityException("Input inválido: $key = $value");
         }
 

@@ -30,7 +30,7 @@ class User extends Fixture
         'password' => '202cb962ac59075b964b07152d234b70',
         'status' => 1
     );
-     public function build($data = null)
+    public function build($data = null)
     {
         return parent::build($data);
     }

@@ -10,7 +10,7 @@ use Core\Service\ParameterFactory;
  * @package    Mvc
  * @author     Elton Minetto<eminetto@coderockr.com>
  */
-class MvcEvent 
+class MvcEvent
 {
     /**
      * Faz a autorização do acesso aos controllers, log e outros testes
@@ -18,7 +18,7 @@ class MvcEvent
      * @return boolean|Response
      */
     public function preDispatch($event)
-    {   
+    {
         $di = $event->getTarget()->getServiceLocator();
         $session = $di->get('Session');
         if (! $session->offsetGet('user')) {
@@ -47,5 +47,4 @@ class MvcEvent
         
         // return true;
     }
-
 }

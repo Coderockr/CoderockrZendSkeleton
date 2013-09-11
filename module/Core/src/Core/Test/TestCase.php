@@ -64,7 +64,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         $env = getenv('ENV');
         //o jenkins tem configurações especiais
         if (!$env || $env != 'jenkins') {
-            putenv("ENV=testing");    
+            putenv("ENV=testing");
             $env = 'testing';
         }
         
@@ -76,9 +76,11 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         $config['module_listener_options']['config_static_paths'] = array();
 
         //cria um novo ServiceManager
-        $this->serviceManager = new ServiceManager(new ServiceManagerConfig(
-                                isset($config['service_manager']) ? $config['service_manager'] : array()
-                ));
+        $this->serviceManager = new ServiceManager(
+            new ServiceManagerConfig(
+                isset($config['service_manager']) ? $config['service_manager'] : array()
+            )
+        );
 
         //configura os serviços básicos no ServiceManager
         $this->serviceManager->setService('ApplicationConfig', $config);
@@ -97,7 +99,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
                     $this->routes[$key] = $name;
                 }
             }
-            $moduleName = explode('\\',get_class($m));
+            $moduleName = explode('\\', get_class($m));
             $moduleName = $moduleName[0];
             //verifica se existe um arquivo de configuração específico no módulo para testes
             if (file_exists(getcwd() . '/module/' . ucfirst($moduleName) . '/config/test.config.php')) {
@@ -184,5 +186,4 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         
         return $this->em;
     }
-
 }

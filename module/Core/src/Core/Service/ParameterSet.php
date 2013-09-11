@@ -40,7 +40,7 @@ class ParameterSet implements Countable
     /**
      * Adiciona um parâmetro ao conjunto 
      * @param Parameter $parameter Parâmetro sendo adicionado
-     */ 
+     */
     public function add(Parameter $parameter)
     {
         $this->parameters[] = $parameter;

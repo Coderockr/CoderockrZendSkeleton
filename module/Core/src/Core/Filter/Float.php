@@ -3,7 +3,6 @@ namespace Core\Filter;
 
 use Zend\Filter\AbstractFilter;
 
-
 /**
  * Faz o filtro de valores convertendo para float
  * @category   Core

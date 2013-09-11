@@ -13,11 +13,10 @@ return array(
         'module_paths' => array(
             './module',
             './vendor',
-	    'Api' => './vendor/coderockr/api'
+        'Api' => './vendor/coderockr/api'
         ),
     ),
     'cache' => array(
         'adapter' => 'memory'
-    ),    
+    ),
 );
-

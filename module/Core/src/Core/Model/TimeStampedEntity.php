@@ -37,7 +37,7 @@ class TimeStampedEntity extends Entity
     {
         parent::setData($data);
         if (!$this->created) {
-            $date = \DateTime::createFromFormat('d/m/Y H:i:s',date('d/m/Y H:i:s'));                     
+            $date = \DateTime::createFromFormat('d/m/Y H:i:s', date('d/m/Y H:i:s'));
             $this->created = $date;
         }
     }
@@ -49,9 +49,9 @@ class TimeStampedEntity extends Entity
      */
     public function getData()
     {
-        if (!$this->created) {            
-            $date = \DateTime::createFromFormat('d/m/Y H:i:s',date('d/m/Y H:i:s'));                   
-            $this->created = $date;                
+        if (!$this->created) {
+            $date = \DateTime::createFromFormat('d/m/Y H:i:s', date('d/m/Y H:i:s'));
+            $this->created = $date;
         }
         return parent::getData();
     }

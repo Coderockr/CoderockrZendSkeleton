@@ -59,15 +59,21 @@ class User extends TimeStampedEntity
             $inputFilter = new InputFilter();
             $factory = new InputFactory();
 
-            $inputFilter->add($factory->createInput(array(
+            $inputFilter->add(
+                $factory->createInput(
+                    array(
                         'name' => 'id',
                         'required' => true,
                         'filters' => array(
                             array('name' => 'Int'),
                         ),
-                    )));
+                    )
+                )
+            );
 
-            $inputFilter->add($factory->createInput(array(
+            $inputFilter->add(
+                $factory->createInput(
+                    array(
                         'name' => 'name',
                         'required' => true,
                         'filters' => array(
@@ -84,9 +90,13 @@ class User extends TimeStampedEntity
                                 ),
                             ),
                         ),
-                    )));
+                    )
+                )
+            );
 
-            $inputFilter->add($factory->createInput(array(
+            $inputFilter->add(
+                $factory->createInput(
+                    array(
                         'name' => 'login',
                         'required' => true,
                         'filters' => array(
@@ -103,9 +113,13 @@ class User extends TimeStampedEntity
                                 ),
                             ),
                         ),
-                    )));
+                    )
+                )
+            );
 
-            $inputFilter->add($factory->createInput(array(
+            $inputFilter->add(
+                $factory->createInput(
+                    array(
                         'name' => 'password',
                         'required' => true,
                         'filters' => array(
@@ -122,17 +136,26 @@ class User extends TimeStampedEntity
                                 ),
                             ),
                         ),
-                    )));
+                    )
+                )
+            );
 
-            $inputFilter->add($factory->createInput(array(
+            $inputFilter->add(
+                $factory->createInput(
+                    array(
                         'name' => 'status',
                         'required' => true,
                         'filters' => array(
                             array('name' => 'StripTags'),
                             array('name' => 'StringTrim'),
                         ),
-                    )));
-            $inputFilter->add($factory->createInput(array(
+                    )
+                )
+            );
+
+            $inputFilter->add(
+                $factory->createInput(
+                    array(
                         'name' => 'created',
                         'required' => false,
                         'filters' => array(
@@ -146,9 +169,11 @@ class User extends TimeStampedEntity
                                 ),
                             ),
                         ),
-                    )));
+                    )
+                )
+            );
             //status é um enum no banco, por isso não precisa de validator,
-            //o próprio banco faz a validação            
+            //o próprio banco faz a validação
             $this->inputFilter = $inputFilter;
         }
 

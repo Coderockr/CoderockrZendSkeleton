@@ -46,7 +46,7 @@ class Value extends AbstractHelper implements ServiceLocatorAwareInterface
     public function __invoke($data, $key, $default = '')
     {
         $escaper = $this->getView()->plugin('escapehtml');
-        if (is_object($data) && property_exists($data,$key)) {
+        if (is_object($data) && property_exists($data, $key)) {
             return $escaper($data->$key);
         }
 

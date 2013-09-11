@@ -28,7 +28,7 @@ return array(
             ),
         )
     ),
-    'mailOptions' => new \Zend\Mail\Transport\SmtpOptions( 
+    'mailOptions' => new \Zend\Mail\Transport\SmtpOptions(
         array(
             'name'              => 'gmail',
             'host'              => 'smtp.gmail.com',
@@ -39,7 +39,7 @@ return array(
                 'password' => '',
                 'ssl'      => 'ssl',
             ),
-        ) 
+        )
     ),
     'cache' => array(
         'adapter' => 'memory',

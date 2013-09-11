@@ -46,18 +46,22 @@ class Steps extends AbstractHelper implements ServiceLocatorAwareInterface
      */
     public function __invoke($data, $positionActive)
     {
-        $this->getView()->headLink()->appendStylesheet('/css/steps.css'); 
+        $this->getView()->headLink()->appendStylesheet('/css/steps.css');
         $xhtml = '<ul class="steps">';
 
         $count = count($data);
         $width = floor(100 / $count);
         for ($i = 0; $i < $count; $i++) {
-            if(isset($data[$i]['link']))
-                $data[$i]['description'] = '<a href="'.$data[$i]['link'].'" title="'.$data[$i]['description'].'">'.$data[$i]['description'].'</a>';
+            if (isset($data[$i]['link'])) {
+                $data[$i]['description'] = '<a href="'.$data[$i]['link'].'" title="'.$data[$i]['description'].'">'
+                                           . $data[$i]['description'].'</a>';
+            }
             
-            $xhtml .='<li style="width:' . $width . '%;" '.($i+1 == $positionActive ? 'class="activated"' : ($i+1 < $positionActive ? 'class="disabled"' : '') ).'>';
+            $xhtml .='<li style="width:' . $width . '%;" ' .
+                    ($i+1 == $positionActive ? 'class="activated"' :
+                    ($i+1 < $positionActive ? 'class="disabled"' : '') ).'>';
             $xhtml .='  <div class="step">';
-            $xhtml .='      <div class="step-image"></div>';            
+            $xhtml .='      <div class="step-image"></div>';
             $xhtml .='      <div class="step-current">Etapa '.($i+1).'</div>';
             $xhtml .='      <div class="step-description">'.$data[$i]['description'].'</div>';
             $xhtml .='  </div>';
@@ -67,5 +71,4 @@ class Steps extends AbstractHelper implements ServiceLocatorAwareInterface
         $xhtml .= '</ul>';
         return $xhtml;
     }
-
 }

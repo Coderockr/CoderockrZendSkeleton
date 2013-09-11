@@ -26,7 +26,12 @@ class Module
         $sharedEvents = $moduleManager->getEventManager()->getSharedManager();
 
         //evento de erros da aplicação
-        $sharedEvents->attach('Core\Controller\ActionController', MvcEvent::EVENT_DISPATCH, array('Application\Mvc\MvcEvent', 'preDispatch'), 100);
+        $sharedEvents->attach(
+            'Core\Controller\ActionController',
+            MvcEvent::EVENT_DISPATCH,
+            array('Application\Mvc\MvcEvent','preDispatch'),
+            100
+        );
     }
 
 
@@ -64,7 +69,7 @@ class Module
     {
         return array(
             'factories' => array(
-                'Application\Service\Auth' => function($sm) {
+                'Application\Service\Auth' => function ($sm) {
                     return new Service\Auth;
                 },
             ),

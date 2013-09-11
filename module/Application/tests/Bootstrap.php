@@ -1,4 +1,6 @@
 <?php
+namespace Application;
+
 use Zend\ServiceManager\ServiceManager;
 use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\Db\Adapter\Adapter;
@@ -15,7 +17,7 @@ class Bootstrap
      * Retorna o nome do módulo
      * @return string O nome do módulo no SO
      */
-    static function getModuleName() 
+    public static function getModuleName()
     {
         return 'Application';
     }
@@ -24,12 +26,12 @@ class Bootstrap
      * Retorna o caminho do módulo
      * @return string O caminho do módulo no SO
      */
-    static function getModulePath() 
+    public static function getModulePath()
     {
         return __DIR__ . '/../../../module/' . \Bootstrap::getModuleName();
     }
 
-    static public function go()
+    public static function go()
     {
         chdir(dirname(__DIR__ . '/../../../..'));
 

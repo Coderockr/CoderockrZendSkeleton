@@ -61,7 +61,7 @@ abstract class Fixture implements ServiceManagerAwareInterface
         }
         
         $object = new $this->entity;
-        $object->setData($this->data); 
+        $object->setData($this->data);
 
         $this->getServiceManager()->get('EntityManager')->persist($object);
         $this->getServiceManager()->get('EntityManager')->flush();

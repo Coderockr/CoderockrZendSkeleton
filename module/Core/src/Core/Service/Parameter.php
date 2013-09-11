@@ -7,9 +7,8 @@ namespace Core\Service;
  * @package    Service
  * @author     Elton Minetto <eminetto@coderockr.com>
  */
-class Parameter 
+class Parameter
 {
-
     /**
      * Nome do parâmetro
      * @var string

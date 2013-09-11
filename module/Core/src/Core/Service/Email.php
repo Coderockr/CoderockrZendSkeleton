@@ -18,17 +18,17 @@ use Zend\Mime\Mime;
 class Email extends Service
 {
 
-    private $options; 
+    private $options;
 
     public function __construct($options)
-    {   
+    {
         $this->setOptions($options);
     }
 
     /**
     *   Envio de email
     **/
-    public function sendMail($email , $subject = null , $messageSent = null)
+    public function sendMail($email, $subject = null, $messageSent = null)
     {
         $message = new Message();
 
@@ -45,7 +45,7 @@ class Email extends Service
     /**
     *   Envio de email
     **/
-    public function sendActvationMail($email , $subject = null , $messageSent = null)
+    public function sendActvationMail($email, $subject = null, $messageSent = null)
     {
         $message = new Message();
         $bodyPart = new MimeMessage;
@@ -127,7 +127,7 @@ class Email extends Service
     *   Função para returnar o tipo do arquivo Mime para a extensão proposta
     **/
     private function getFileType($extension)
-    {   
+    {
         $extension = strtolower($extension);
         switch ($extension) {
             case 'jpg':
@@ -157,7 +157,7 @@ class Email extends Service
             case 'rar':
                 $fileType = 'application/x-rar-compressed';
                 break;
-       }
-       return $fileType;
+        }
+        return $fileType;
     }
 }

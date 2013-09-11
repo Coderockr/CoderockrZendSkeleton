@@ -98,12 +98,11 @@ class DateTimeFormat extends AbstractHelper implements ServiceLocatorAwareInterf
 
             $errors = \DateTime::getLastErrors();
 
-            if ($errors['warning_count'] === 0 && $date != false) {                
+            if ($errors['warning_count'] === 0 && $date != false) {
                 return $date;
             }
         }
 
         return null;
     }
-
 }

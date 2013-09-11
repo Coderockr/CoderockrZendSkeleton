@@ -56,7 +56,7 @@ class AuthTest extends ServiceTestCase
      * @return void
      */
     public function testAuthInvalidParameters()
-    {   
+    {
         //faz o teste com uma senha inválida
         $user = $this->buildUser();
 
@@ -70,7 +70,7 @@ class AuthTest extends ServiceTestCase
             )
         );
 
-        $result = $this->authService->authenticate($parameters);    
+        $result = $this->authService->authenticate($parameters);
     }
 
     /**
@@ -78,7 +78,7 @@ class AuthTest extends ServiceTestCase
      * @return void
      */
     public function testAuthValid()
-    {   
+    {
         //faz o teste com uma senha inválida
         $user = $this->buildUser();
         $this->em->persist($user);
@@ -92,13 +92,13 @@ class AuthTest extends ServiceTestCase
         );
 
         // Verifica o response
-        $this->assertEquals(true, $this->authService->authenticate($parameters));    
+        $this->assertEquals(true, $this->authService->authenticate($parameters));
     }
 
     
     private function buildUser()
     {
-        $saved = $this->getFixture('Application\Test\Fixture\User')->build();        
+        $saved = $this->getFixture('Application\Test\Fixture\User')->build();
         return $saved;
     }
 }

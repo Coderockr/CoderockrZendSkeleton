@@ -70,7 +70,7 @@ class Builder implements ServiceManagerAwareInterface
                 $this->addResource($r['controller']);
             }
         }
-        foreach($this->defaultResources as $r) {
+        foreach ($this->defaultResources as $r) {
             $this->addResource($r);
         }
 

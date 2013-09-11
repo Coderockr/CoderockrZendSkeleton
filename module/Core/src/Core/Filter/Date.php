@@ -41,12 +41,12 @@ class Date extends AbstractFilter
             /** Oracle Unochapecó CLI: 27/11/12 */
             'd/m/y',
             /** Frontend; Oracle Unochapecó ZF1: 27/11/2012 */
-            'd/m/Y',            
-        );        
+            'd/m/Y',
+        );
 
         foreach ($dateFormats as $format) {
             $date = $this->createFromFormat($format, $value);
-            if ($date != false) {                
+            if ($date != false) {
                 return $date;
             }
         }
@@ -54,12 +54,12 @@ class Date extends AbstractFilter
     }
 
     private function createFromFormat($format, $value)
-    {        
-        if ( ! $value) {
+    {
+        if (! $value) {
             return $value;
         }
 
-        if ( ! is_string($value)) {
+        if (! is_string($value)) {
             $value = $value->format($format);
         }
         $date = DateTime::createFromFormat($format, $value);
@@ -68,7 +68,7 @@ class Date extends AbstractFilter
         // mas, ainda assim, retornar um objeto DateTime
         $errors = DateTime::getLastErrors();
         
-        if ($errors['warning_count'] === 0 && $date != false) {            
+        if ($errors['warning_count'] === 0 && $date != false) {
             return $date;
         }
         
@@ -77,13 +77,15 @@ class Date extends AbstractFilter
     
     
     public function formatDateFromDatabase($platformName, $date)
-    {        
+    {
         $date = $this->filter($date);
         $formatDate = array('database' => 'YYYY-MM-DD HH24:MI:SS', 'php' => 'Y-m-d H:i:s');
         switch ($platformName) {
             case 'Oracle':
             case 'PostgreSQL':
-                $date = new \Zend\Db\Sql\Expression('to_date(\'' . $date->format($formatDate['php']) . '\',\'' . $formatDate['database'] . '\')');
+                $date = new \Zend\Db\Sql\Expression(
+                    'to_date(\'' . $date->format($formatDate['php']) . '\',\'' . $formatDate['database'] . '\')'
+                );
                 break;
             case 'SQLite':
             case 'MySQL':
@@ -92,6 +94,4 @@ class Date extends AbstractFilter
         }
         return $date;
     }
-    
-    
 }

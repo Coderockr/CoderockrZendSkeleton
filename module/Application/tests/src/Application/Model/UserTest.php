@@ -6,6 +6,7 @@ use Core\Model\EntityException;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\InputFilter\InputFilter;
 use Application\Model\User;
+
 /**
  * @group Model
  */
@@ -25,7 +26,7 @@ class UserTest extends ModelTestCase
      * @depends testGetInputFilter
      */
     public function testInputFilterValid($if)
-    {   
+    {
         $user = new User();
         $if = $user->getInputFilter();
 
@@ -45,7 +46,7 @@ class UserTest extends ModelTestCase
      * @expectedExceptionMessage Not used
      */
     public function testSetInputFilter()
-    {   
+    {
         $user = new User();
         $if = new InputFilter();
         $user->setInputFilter($if);
@@ -55,10 +56,10 @@ class UserTest extends ModelTestCase
      * Teste de inserção de um user válido
      */
     public function testInsert()
-    {   
+    {
         $user = $this->getFixture('Application\Test\Fixture\User')->build();
 
-        $em = $this->getService('EntityManager');               
+        $em = $this->getService('EntityManager');
         $saved = $em->getRepository('Application\Model\User')->find($user->id);
 
         $this->assertEquals($user->id, $saved->id);
@@ -71,8 +72,12 @@ class UserTest extends ModelTestCase
     {
         $user = new User();
         //recurso só pode ter 100 caracteres
-        $user->name = 'Lorem Ipsum é simpaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalesmente uma simulação de texto da indústria tipográfica e de impressos Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos';
-    }        
+        $user->name = 'Lorem Ipsum é simpaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaalesmente uma simulação de texto da indústria tipo
+            gráfica e de impressos Lorem Ipsum é simplesmente uma simulação de texto da ind
+            ústria tipográfica e de impressos Lorem Ipsum é simplesmente uma simulação de tex
+            to da indústria tipográfica e de impressos';
+    }
 
     /**
      * @expectedException Doctrine\DBAL\DBALException
@@ -84,5 +89,5 @@ class UserTest extends ModelTestCase
 
         $this->em->persist($user);
         $this->em->flush();
-    }  
+    }
 }

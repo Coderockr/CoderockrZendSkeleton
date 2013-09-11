@@ -4,7 +4,7 @@ return array(
     'testing' => array(
         'config' => array(
             'cache_sql' => false,
-        ),    
+        ),
         'data' => array(
             'file' => 'test.data.php'
         )

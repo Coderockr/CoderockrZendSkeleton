@@ -21,7 +21,12 @@ class Module
         $sharedEvents = $moduleManager->getEventManager()->getSharedManager();
 
         //evento de erros da aplicação
-        $sharedEvents->attach('Zend\Mvc\Application', MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'errorProcess'), 999);
+        $sharedEvents->attach(
+            'Zend\Mvc\Application',
+            MvcEvent::EVENT_DISPATCH_ERROR,
+            array($this, 'errorProcess'),
+            999
+        );
     }
 
     /**
@@ -59,12 +64,12 @@ class Module
     {
         return array(
             'factories' => array(
-                'Core\Service\Client' => function($sm) { //cria um novo Client de acordo com a configuração
+                'Core\Service\Client' => function ($sm) { //cria um novo Client de acordo com a configuração
                     $config = $sm->get('Configuration');
                     $apiConfig = $config['api'];
                     return new Service\Client($apiConfig['apiKey'], $apiConfig['apiUri'], $apiConfig['rpcUri']);
                 },
-                'Log' => function($sm) {
+                'Log' => function ($sm) {
                     $writer = new \Zend\Log\Writer\Stream('/tmp/project.log');
                     $logger = new \Zend\Log\Logger();
                     $logger->addWriter($writer);
@@ -84,8 +89,9 @@ class Module
         $routeMatch = $e->getRouteMatch();
 
         $formatter = $routeMatch->getParam('formatter', false);
-        if ($formatter == false)
+        if ($formatter == false) {
             return;
+        }
         /** @var \Zend\Di\Di $di */
         $di = $e->getApplication()->getServiceManager()->get('di');
 
@@ -121,8 +127,7 @@ class Module
                 
         $postProcessor->process();
 
-        if (
-            $eventParams['error'] === \Zend\Mvc\Application::ERROR_CONTROLLER_NOT_FOUND ||
+        if ($eventParams['error'] === \Zend\Mvc\Application::ERROR_CONTROLLER_NOT_FOUND ||
             $eventParams['error'] === \Zend\Mvc\Application::ERROR_ROUTER_NO_MATCH
         ) {
             $e->getResponse()->setStatusCode(\Zend\Http\PhpEnvironment\Response::STATUS_CODE_501);

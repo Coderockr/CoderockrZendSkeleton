@@ -4,7 +4,6 @@ namespace Core\Validator;
 
 use Zend\I18n\Validator\Float as I18nFloat;
 
-
 /**
  * Faz a validação especial do tamanho do valor enviado
  *
@@ -53,7 +52,7 @@ class Float extends I18nFloat
             return false;
         }
 
-        if ($this->max_precision ) {
+        if ($this->max_precision) {
             $maxSize = strlen((string) intval($value)) + 1 + $this->max_precision;
             if (strlen($value) > $maxSize) {
                 $this->error('Precisão maior do que o permitido');
