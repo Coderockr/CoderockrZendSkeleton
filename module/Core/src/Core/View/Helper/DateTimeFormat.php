@@ -64,16 +64,16 @@ class DateTimeFormat extends AbstractHelper implements ServiceLocatorAwareInterf
         return $default;
     }
 
-    private function convertFromString($data) 
+    private function convertFromString($data)
     {
         if (is_string($data) && $data) {
             return $this->createFromFormat($data);
         }
         return $data;
-    }    
+    }
 
     private function convertFromObject($data, $key)
-    {        
+    {
         if (is_object($data) && isset($data->$key) && !is_null($data->$key)) {
             
             if (!($data->$key instanceof \DateTime)) {

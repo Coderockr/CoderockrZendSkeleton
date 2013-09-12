@@ -64,7 +64,8 @@ class Module
     {
         return array(
             'factories' => array(
-                'Core\Service\Client' => function ($serviceManager) { //cria um novo Client de acordo com a configuração
+                'Core\Service\Client' => function ($serviceManager) {
+                //cria um novo Client de acordo com a configuração
                     $config = $serviceManager->get('Configuration');
                     $apiConfig = $config['api'];
                     return new Service\Client($apiConfig['apiKey'], $apiConfig['apiUri'], $apiConfig['rpcUri']);

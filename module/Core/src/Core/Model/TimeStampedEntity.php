@@ -16,11 +16,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class TimeStampedEntity extends Entity
 {
-    /**
-     * @ORM\Column(type="datetime")
-     * @var datetime
-     */
-    protected $created;
 
     /**
      * @ORM\Column(type="datetime",nullable=true)

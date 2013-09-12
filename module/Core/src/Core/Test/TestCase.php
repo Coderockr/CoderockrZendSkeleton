@@ -94,11 +94,8 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         //carrega as rotas dos módulos
         foreach ($moduleManager->getLoadedModules() as $m) {
             $moduleConfig = $m->getConfig();
-            if (isset($moduleConfig['router'])) {
-                foreach ($moduleConfig['router']['routes'] as $key => $name) {
-                    $this->routes[$key] = $name;
-                }
-            }
+            $this->getModuleRoutes($moduleConfig);
+            
             $moduleName = explode('\\', get_class($m));
             $moduleName = $moduleName[0];
             //verifica se existe um arquivo de configuração específico no módulo para testes
@@ -123,11 +120,20 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
                 ->setResponse($this->application->getResponse())
                 ->setRouter($this->serviceManager->get('Router'));
 
-        $this->em = $this->getEntityManager();
+        $this->entityManager = $this->getEntityManager();
         $this->dropDatabase();
         $this->createDatabase();
     }
 
+    protected function getModuleRoutes($moduleConfig)
+    {
+        if (isset($moduleConfig['router'])) {
+            foreach ($moduleConfig['router']['routes'] as $key => $name) {
+                $this->routes[$key] = $name;
+            }
+        }
+    }
+    
     /**
      * Retorna uma instância de Service
      *
@@ -157,8 +163,8 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     public function createDatabase()
     {
 
-        $schemaTool = new \Doctrine\ORM\Tools\SchemaTool($this->em);
-        $classes = $this->em->getMetadataFactory()->getAllMetadata();
+        $schemaTool = new \Doctrine\ORM\Tools\SchemaTool($this->entityManager);
+        $classes = $this->entityManager->getMetadataFactory()->getAllMetadata();
         $schemaTool->createSchema($classes);
     }
 
@@ -168,8 +174,8 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
      */
     public function dropDatabase()
     {
-        $schemaTool = new \Doctrine\ORM\Tools\SchemaTool($this->em);
-        $classes = $this->em->getMetadataFactory()->getAllMetadata();
+        $schemaTool = new \Doctrine\ORM\Tools\SchemaTool($this->entityManager);
+        $classes = $this->entityManager->getMetadataFactory()->getAllMetadata();
         $schemaTool->dropSchema($classes);
     }
 
@@ -179,8 +185,8 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
      */
     private function getEntityManager()
     {
-        if ($this->em) {
-            return $this->em;
+        if ($this->entityManager) {
+            return $this->entityManager;
         }
         $this->em = $this->serviceManager->get('EntityManager');
         

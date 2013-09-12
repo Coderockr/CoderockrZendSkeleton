@@ -39,6 +39,12 @@ abstract class Entity implements InputFilterAwareInterface
     protected $inputFilter = null;
 
     /**
+     * Filters and validators
+     * @var array
+     */
+    protected $filters = array();
+
+    /**
      * Valida e atribui os valores dos campos da entidade
      *
      * @param string $key   O nome do campo
@@ -133,13 +139,25 @@ abstract class Entity implements InputFilterAwareInterface
     }
 
     /**
-     * Filtros da entidade. Pode ser definida na classe filha
+     * Configura os filtros dos campos da entidade
      *
-     * @return InputFilter
+     * @return Zend\InputFilter\InputFilter
      */
     public function getInputFilter()
     {
+        if (!$this->inputFilter) {
+            $inputFilter = new InputFilter();
+            $factory = new InputFactory();
 
+            foreach ($this->filters as $f) {
+                $inputFilter->add(
+                    $factory->createInput($f)
+                );    
+            }
+            $this->inputFilter = $inputFilter;
+        }
+
+        return $this->inputFilter;
     }
 
 

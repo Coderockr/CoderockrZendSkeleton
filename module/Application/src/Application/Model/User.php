@@ -4,9 +4,6 @@ namespace Application\Model;
 
 use Core\Model\TimeStampedEntity;
 use Core\Model\EntityException;
-use Zend\InputFilter\InputFilter;
-use Zend\InputFilter\Factory as InputFactory;
-use Zend\InputFilter\InputFilterInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,135 +45,95 @@ class User extends TimeStampedEntity
      */
     protected $status;
 
+
     /**
-     * Configura os filtros dos campos da entidade
-     *
-     * @return Zend\InputFilter\InputFilter
+     * Filters and validators
+     * @var array
      */
-    public function getInputFilter()
-    {
-        if (!$this->inputFilter) {
-            $inputFilter = new InputFilter();
-            $factory = new InputFactory();
-
-            $inputFilter->add(
-                $factory->createInput(
-                    array(
-                        'name' => 'id',
-                        'required' => true,
-                        'filters' => array(
-                            array('name' => 'Int'),
-                        ),
-                    )
-                )
-            );
-
-            $inputFilter->add(
-                $factory->createInput(
-                    array(
-                        'name' => 'name',
-                        'required' => true,
-                        'filters' => array(
-                            array('name' => 'StripTags'),
-                            array('name' => 'StringTrim'),
-                        ),
-                        'validators' => array(
-                            array(
-                                'name' => 'StringLength',
-                                'options' => array(
-                                    'encoding' => 'UTF-8',
-                                    'min' => 1,
-                                    'max' => 100,
-                                ),
-                            ),
-                        ),
-                    )
-                )
-            );
-
-            $inputFilter->add(
-                $factory->createInput(
-                    array(
-                        'name' => 'login',
-                        'required' => true,
-                        'filters' => array(
-                            array('name' => 'StripTags'),
-                            array('name' => 'StringTrim'),
-                        ),
-                        'validators' => array(
-                            array(
-                                'name' => 'StringLength',
-                                'options' => array(
-                                    'encoding' => 'UTF-8',
-                                    'min' => 1,
-                                    'max' => 45,
-                                ),
-                            ),
-                        ),
-                    )
-                )
-            );
-
-            $inputFilter->add(
-                $factory->createInput(
-                    array(
-                        'name' => 'password',
-                        'required' => true,
-                        'filters' => array(
-                            array('name' => 'StripTags'),
-                            array('name' => 'StringTrim'),
-                        ),
-                        'validators' => array(
-                            array(
-                                'name' => 'StringLength',
-                                'options' => array(
-                                    'encoding' => 'UTF-8',
-                                    'min' => 1,
-                                    'max' => 255,
-                                ),
-                            ),
-                        ),
-                    )
-                )
-            );
-
-            $inputFilter->add(
-                $factory->createInput(
-                    array(
-                        'name' => 'status',
-                        'required' => true,
-                        'filters' => array(
-                            array('name' => 'StripTags'),
-                            array('name' => 'StringTrim'),
-                        ),
-                    )
-                )
-            );
-
-            $inputFilter->add(
-                $factory->createInput(
-                    array(
-                        'name' => 'created',
-                        'required' => false,
-                        'filters' => array(
-                            array('name' => 'Core\Filter\Date'),
-                        ),
-                        'validators' => array(
-                            array(
-                                'name' => 'date',
-                                'options' => array(
-                                    'format' => 'd/m/Y h:i:s'
-                                ),
-                            ),
-                        ),
-                    )
-                )
-            );
-            //status é um enum no banco, por isso não precisa de validator,
-            //o próprio banco faz a validação
-            $this->inputFilter = $inputFilter;
-        }
-
-        return $this->inputFilter;
-    }
+    protected $filters = array(
+        array(
+            'name' => 'id',
+            'required' => true,
+            'filters' => array(
+                array('name' => 'Int'),
+            ),
+        ),
+        array(
+            'name' => 'name',
+            'required' => true,
+            'filters' => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'StringLength',
+                    'options' => array(
+                        'encoding' => 'UTF-8',
+                        'min' => 1,
+                        'max' => 100,
+                    ),
+                ),
+            ),
+        ),
+        array(
+            'name' => 'login',
+            'required' => true,
+            'filters' => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'StringLength',
+                    'options' => array(
+                        'encoding' => 'UTF-8',
+                        'min' => 1,
+                        'max' => 45,
+                    ),
+                ),
+            ),
+        ),
+        array(
+            'name' => 'password',
+            'required' => true,
+            'filters' => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'StringLength',
+                    'options' => array(
+                        'encoding' => 'UTF-8',
+                        'min' => 1,
+                        'max' => 255,
+                    ),
+                ),
+            ),
+        ),
+        array(
+            'name' => 'status',
+            'required' => true,
+            'filters' => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+        ),
+        array(
+            'name' => 'created',
+            'required' => false,
+            'filters' => array(
+                array('name' => 'Core\Filter\Date'),
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'date',
+                    'options' => array(
+                        'format' => 'd/m/Y h:i:s'
+                    ),
+                ),
+            ),
+        )
+    );
 }
