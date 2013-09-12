@@ -152,7 +152,7 @@ abstract class Entity implements InputFilterAwareInterface
             foreach ($this->filters as $f) {
                 $inputFilter->add(
                     $factory->createInput($f)
-                );    
+                );
             }
             $this->inputFilter = $inputFilter;
         }
