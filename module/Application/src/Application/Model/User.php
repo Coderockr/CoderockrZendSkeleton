@@ -23,7 +23,7 @@ class User extends TimeStampedEntity
      * @ORM\Column(type="integer");
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    protected $idUser;
 
     /**
      * @ORM\Column(type="string")
@@ -52,7 +52,7 @@ class User extends TimeStampedEntity
      */
     protected $filters = array(
         array(
-            'name' => 'id',
+            'name' => 'idUser',
             'required' => true,
             'filters' => array(
                 array('name' => 'Int'),
