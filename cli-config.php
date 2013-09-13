@@ -9,7 +9,10 @@ $coreClassLoader = new \Doctrine\Common\ClassLoader('Core', __DIR__ . '/module/C
 $coreClassLoader->register();
 $entityClassLoader = new \Doctrine\Common\ClassLoader('Entities', __DIR__ . '/vendor/coderockr/api/src/Api/Model');
 $entityClassLoader->register();
-$proxyClassLoader = new \Doctrine\Common\ClassLoader('EntityProxy', __DIR__ . '/vendor/coderockr/api/src/Api/Model/Proxies');
+$proxyClassLoader = new \Doctrine\Common\ClassLoader(
+    'EntityProxy',
+    __DIR__ . '/vendor/coderockr/api/src/Api/Model/Proxies'
+);
 $proxyClassLoader->register();
 
 
