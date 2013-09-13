@@ -30,3 +30,6 @@ test:
 complete:
     mysql:
         - "DROP DATABASE IF EXISTS coderockr_skell_test;"
+failure:
+    email:
+        default_mailto_address: "eminetto@coderockr.com"
