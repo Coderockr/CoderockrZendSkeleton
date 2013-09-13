@@ -7,9 +7,9 @@ $apiClassLoader = new \Doctrine\Common\ClassLoader('Api', __DIR__ . '/vendor/cod
 $apiClassLoader->register();
 $coreClassLoader = new \Doctrine\Common\ClassLoader('Core', __DIR__ . '/module/Core/src');
 $coreClassLoader->register();
-$entityClassLoader = new \Doctrine\Common\ClassLoader('Entities', __DIR__ . '/module/Api/src/Api/Model');
+$entityClassLoader = new \Doctrine\Common\ClassLoader('Entities', __DIR__ . '/vendor/coderockr/api/src/Api/Model');
 $entityClassLoader->register();
-$proxyClassLoader = new \Doctrine\Common\ClassLoader('EntityProxy', __DIR__ . '/module/Api/src/Api/Model/Proxies');
+$proxyClassLoader = new \Doctrine\Common\ClassLoader('EntityProxy', __DIR__ . '/vendor/coderockr/api/src/Api/Model/Proxies');
 $proxyClassLoader->register();
 
 
@@ -41,7 +41,7 @@ $doctrineConfig->setAutoGenerateProxyClasses(true);
 $driver = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver(
     new \Doctrine\Common\Annotations\AnnotationReader(),
     array(
-        __DIR__ . '/module/Api/src/Api/Model',
+        __DIR__ . '/vendor/coderockr/api/src/Api/Model',
         __DIR__ . '/module/Application/src/Application/Model'
     )
 );
