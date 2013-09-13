@@ -20,23 +20,6 @@ abstract class ActionController extends AbstractActionController
      */
     protected $eventIdentifier = __CLASS__;
 
-
-    /**
-     * Retorna uma instância de TableGateway
-     *
-     * @param  string $table
-     * @return TableGateway
-     */
-    protected function getTable($table)
-    {
-        $serviceManager = $this->getServiceLocator();
-        $dbAdapter = $serviceManager->get('DbAdapter');
-        $tableGateway = new TableGateway($dbAdapter, $table, new $table);
-        $tableGateway->initialize();
-        
-        return $tableGateway;
-    }
-
     /**
      * Retorna uma instância de Service\Client
      *
