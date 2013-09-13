@@ -4,7 +4,6 @@ namespace Core\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
-use Core\Db\TableGateway;
 
 /**
  * Classe pai dos controlladores
@@ -15,11 +14,6 @@ use Core\Db\TableGateway;
  */
 abstract class ActionController extends AbstractActionController
 {
-    /**
-     * @var string
-     */
-    protected $eventIdentifier = __CLASS__;
-
     /**
      * Retorna uma instância de Service\Client
      *
