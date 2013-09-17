@@ -1,5 +1,5 @@
 <?php
-namespace Application;
+namespace Skel;
 
 use Zend\ServiceManager\ServiceManager;
 use Zend\Mvc\Service\ServiceManagerConfig;
@@ -10,10 +10,10 @@ use Zend\Loader\StandardAutoloader;
 /**
  * Bootstrap dos testes
  * 
- * @category Application
+ * @category Skel
  * @author  Elton Minetto<eminetto@coderockr.com>
  */
-class BootstrapClass
+class Bootstrap
 {
     /**
      * Retorna o nome do módulo
@@ -21,7 +21,7 @@ class BootstrapClass
      */
     public static function getModuleName()
     {
-        return 'Application';
+        return 'Skel';
     }
 
     /**
@@ -33,6 +33,11 @@ class BootstrapClass
         return __DIR__ . '/../../../module/' . \Bootstrap::getModuleName();
     }
 
+
+    /**
+     * Executa a configuração básica dos loaders
+     * @return void
+     */
     public static function execute()
     {
         chdir(dirname(__DIR__ . '/../../../..'));

@@ -1,0 +1,94 @@
+<?php
+namespace Skel\Controller;
+
+use Core\Test\ControllerTestCase;
+use Skel\Controller\IndexController;
+use Skel\Model\Post;
+use Zend\Http\Request;
+use Zend\Stdlib\Parameters;
+use Zend\View\Renderer\PhpRenderer;
+
+/**
+ * Testes do controller PostReport
+ * 
+ * @category Skel
+ * @package Controller
+ * @author  Elton Minetto<eminetto@coderockr.com>
+ */
+
+/**
+ * @group Controller
+ */
+class PostReportControllerTest extends ControllerTestCase
+{
+    /**
+     * Namespace completa do Controller
+     * @var string
+     */
+    protected $controllerFQDN = 'Skel\Controller\PostReportController';
+
+    /**
+     * Nome da rota. Geralmente o nome do módulo
+     * @var string
+     */
+    protected $controllerRoute = 'skel';
+
+    /**
+     * Testa ação não existente
+     * @return void
+     */
+    public function test404()
+    {
+        $this->routeMatch->setParam('action', 'action_nao_existente');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(404, $response->getStatusCode());
+    }
+
+    /**
+     * @expectedException Exception
+     * @expectedExceotionMessage Este relatório não tem formulário de parâmetros
+     */
+    public function testIndexAction()
+    {
+        // Invoca a rota index
+        $this->routeMatch->setParam('action', 'index');
+        $result = $this->controller->dispatch($this->request, $this->response);
+
+        // Verifica o response
+        $response = $this->controller->getResponse();
+        $this->assertEquals(404, $response->getStatusCode());
+    }  
+
+    public function testRunAction()
+    {
+        $postA = $this->addPost();
+        $postB = $this->addPost();
+
+        // Dispara a ação
+        $this->routeMatch->setParam('action', 'run');
+        $result = $this->controller->dispatch($this->request, $this->response);
+
+        // Verifica a resposta
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $headers = $response->getHeaders();
+        $this->assertEquals('application/pdf',$headers->get('Content-Type')->value);
+        $this->assertNotEquals('Content-Length: 0',$headers->get('Content-Length')->value);
+    }
+
+
+    /**
+     * Adiciona um novo post para os testes
+     * @param Skel\Model\Post   Um novo post
+     */
+    private function addPost()
+    {
+        $post = new Post();
+        $post->title = 'Apple compra a Coderockr';
+        $post->body = 'A Apple compra a <b>Coderockr</b><br> ';
+
+        $saved = $this->getTable('Skel\Model\Post')->save($post);
+        return $saved;
+    }
+}

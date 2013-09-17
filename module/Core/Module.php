@@ -9,19 +9,6 @@ use Zend\Cache\StorageFactory;
 class Module
 {
     /**
-     * Executada no bootstrap do módulo
-     * 
-     * @param MvcEvent $event
-     */
-    public function onBootstrap($event)
-    {
-        /** @var \Zend\ModuleManager\ModuleManager $moduleManager */
-        $moduleManager = $event->getApplication()->getServiceManager()->get('modulemanager');
-        /** @var \Zend\EventManager\SharedEventManager $sharedEvents */
-        $sharedEvents = $moduleManager->getEventManager()->getSharedManager();
-    }
-
-    /**
      * Retorna a configuração dos caminhos e namespaces a carregar
      * @return array Loaders
      */

@@ -1,6 +1,4 @@
 <?php
-namespace Application;
-
 use Zend\ServiceManager\ServiceManager;
 use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\Db\Adapter\Adapter;
@@ -10,30 +8,36 @@ use Zend\Loader\StandardAutoloader;
 /**
  * Bootstrap dos testes
  * 
- * @category Application
+ * @category Skel
+ * @package Service
  * @author  Elton Minetto<eminetto@coderockr.com>
  */
-class BootstrapClass
+class Bootstrap
 {
     /**
      * Retorna o nome do módulo
      * @return string O nome do módulo no SO
      */
-    public static function getModuleName()
+    static function getModuleName() 
     {
-        return 'Application';
+        return 'Skel';
     }
 
     /**
      * Retorna o caminho do módulo
      * @return string O caminho do módulo no SO
      */
-    public static function getModulePath()
+    static function getModulePath() 
     {
         return __DIR__ . '/../../../module/' . \Bootstrap::getModuleName();
     }
 
-    public static function execute()
+
+    /**
+     * Executa a configuração básica dos loaders
+     * @return void
+     */
+    static public function go()
     {
         chdir(dirname(__DIR__ . '/../../../..'));
 
@@ -64,3 +68,5 @@ class BootstrapClass
         );
     }
 }
+
+Bootstrap::go();
