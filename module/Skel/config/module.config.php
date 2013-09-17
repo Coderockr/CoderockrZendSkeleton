@@ -4,7 +4,7 @@
 return array(
     'controllers' => array( //adicionar os controladores do módulo
         'invokables' => array(
-            'index' => 'Skel\Controller\IndexController',
+            'skel-index' => 'Skel\Controller\IndexController',
         ),
     ),
 
@@ -15,7 +15,7 @@ return array(
                 'options' => array(
                     'route'    => '/skel', //mudar o path
                     'defaults' => array(
-                        'controller' => 'index',
+                        'controller' => 'skel-index',
                         'action'     => 'index',
                         'module'     => 'skel', //mudar o nome do módulo
                         'moduleUri'  => 'skel' //mudar para a url do módulo: /skel
@@ -32,7 +32,7 @@ return array(
                                 'page'       => '[0-9]+'
                             ),
                             'defaults' => array(
-                                'controller' => 'index',
+                                'controller' => 'skel-index',
                                 'action'     => 'index',
                                 'page'       => 1
                             ),
