@@ -1,5 +1,5 @@
 <?php
-namespace Skel;
+namespace CoderockrZendSkeleton;
 
 include 'BootstrapClass.php';
 

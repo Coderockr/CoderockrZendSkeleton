@@ -7,17 +7,22 @@
 >
     <testsuites>
         <testsuite name="Application Test Suite">
-            <directory>./</directory>
+            <directory>./module/Application/tests/src/</directory>
+        </testsuite>
+        <testsuite name="Core Test Suite">
+            <directory>./module/Core/tests/src/</directory>
+        </testsuite>
+        <testsuite name="Skel Test Suite">
+            <directory>./module/Skel/tests/src/</directory>
         </testsuite>
     </testsuites>
 
     <!-- Code Coverage Configuration -->
     <filter>
         <whitelist>
-            <directory suffix=".php">../</directory>
-            <exclude>
-                <directory suffix=".php">./</directory>
-            </exclude>
+            <directory suffix=".php">./module/Application/src/</directory>
+            <directory suffix=".php">./module/Core/src/</directory>
+            <directory suffix=".php">./module/Skel/src/</directory>
         </whitelist>
     </filter>
 
